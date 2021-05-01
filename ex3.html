@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+<div id="app">
+    <div class="app">
+        <list-item v-for="(item,index) in items"  v-bind:key="item.id" v-bind:item="item"  v-on:remove="items.splice(index, 1)"></list-item>
+    </div>
+
+</div>
+
+
+<script>
+    const app = Vue.createApp({
+        data(){
+            return{
+                items:[{id:1,text:"hello 1"},{id:2,text:"hello 2"},
+                {id:3,text:"hello 3"},{id:4,text:"hello 4"},
+                {id:5,text:"hello 5"},{id:6,text:"hello 6"},
+                {id:7,text:"hello 7"},{id:8,text:"hello 8"},
+                {id:9,text:"hello 9"},{id:10,text:"hello 10"},]
+            }
+        },
+       components:{
+            "list-item":{
+                   
+                    template:
+                        `
+                        <div class="box">
+                                <span>{{item.text}}</span>
+                                <button v-on:click="$emit('remove')">Remove</button>
+                            </div>
+                        `,
+                        props:['item'],
+                    emits: ['remove']
+            }
+        
+       },
+       
+    }).mount("#app")
+</script>
+<style>
+.box{
+            border: solid black;
+            width: 50%;
+            display: flex;
+            padding: 30px;
+            justify-content: space-between;
+        }
+        button{
+            border: red solid 1px;
+            color: blue;
+        }
+</style>
+</head>
+<body>
+    
+</body>
+</html>
